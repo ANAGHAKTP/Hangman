@@ -1,0 +1,614 @@
+/* =========================================
+   1. THEME VARIABLES (DESIGN TOKENS)
+   ========================================= */
+:root {
+    /* 🥇 Minimal Intelligence (Default) */
+    --bg-primary: #F8FAFC;
+    --bg-panel: #FFFFFF;
+    --border-color: #E5E7EB;
+
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+
+    --accent-primary: #2563EB;
+    /* Intelligent Blue */
+    --accent-secondary: #14B8A6;
+    /* Teal */
+
+    --status-success: #22C55E;
+    --status-warning: #F59E0B;
+    --status-error: #EF4444;
+
+    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+    /* Effects (Minimal has no CRT/Glow by default) */
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --glow-strength: 0px;
+    --scanline-opacity: 0;
+}
+
+/* 🥈 Cyber Neon (Pro Mode) */
+body.theme-cyber {
+    --bg-primary: #020617;
+    --bg-panel: #020617;
+    --border-color: #1E293B;
+
+    --text-primary: #E5E7EB;
+    --text-secondary: #94A3B8;
+
+    /* Neon Accents */
+    --accent-primary: #22C55E;
+    /* Neon Green */
+    --accent-secondary: #06B6D4;
+    /* Neon Cyan */
+    --status-error: #F43F5E;
+    /* Critical Red */
+
+    /* Tech Font (Matching Reference) */
+    --font-main: 'JetBrains Mono', monospace;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --shadow-soft: 0 0 20px rgba(34, 197, 94, 0.1);
+    --glow-strength: 0 0 10px;
+    --scanline-opacity: 0.15;
+}
+
+/* =========================================
+   2. GLOBAL STYLES & LAYOUT
+   ========================================= */
+@font-face {
+    font-family: 'Share Tech Mono';
+    src: url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* =========================================
+   3. ANIMATION UTILITIES (TIMING & EASING)
+   ========================================= */
+:root {
+    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-snap: cubic-bezier(0.4, 0, 1, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* =========================================
+   4. COMPONENT STYLES
+   ========================================= */
+
+/* Main Container */
+.terminal-container {
+    width: 95%;
+    max-width: 1000px;
+    /* Tighter for modern look */
+    height: 85vh;
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: row;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Stats */
+.stats {
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+}
+
+.theme-cyber .stats {
+    text-shadow: 0 0 4px var(--accent-primary);
+    color: var(--text-primary);
+    font-weight: bold;
+}
+
+.theme-cyber .stats span {
+    color: var(--accent-secondary);
+    /* Numbers pop in Cyan */
+}
+
+/* Main Area */
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    position: relative;
+    z-index: 85;
+    /* Above Grid opacity layer */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    border-right: 1px solid var(--border-color);
+    padding: 24px;
+    background: var(--bg-panel);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 85;
+    /* Above Grid opacity layer */
+    overflow-y: auto;
+    /* Allow scrolling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+.brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    margin-bottom: 32px;
+    letter-spacing: 0.05em;
+    /* Increased from -0.02em */
+    text-shadow: var(--glow-strength) var(--accent-primary);
+}
+
+h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    letter-spacing: 0.1em;
+    /* Increased spacing */
+    font-weight: 700;
+    /* Heavier weight for Minimal */
+}
+
+.theme-cyber h3 {
+    font-weight: 400;
+    /* Reset for Cyber */
+    letter-spacing: 0.05em;
+}
+
+/* Breach Stages */
+#breach-stages {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 24px;
+    /* Space between list and stats */
+    flex-grow: 1;
+}
+
+#breach-stages li {
+    padding: 8px 12px;
+    margin-bottom: 4px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border-left: 2px solid transparent;
+    transition: all 0.3s var(--ease-default);
+}
+
+/* ACTIVE STATE - Matches User Reference Image */
+#breach-stages li.active {
+    background-color: rgba(239, 68, 68, 0.1);
+    /* Fallback */
+    color: var(--status-error);
+    border-left: 3px solid var(--status-error);
+    font-weight: 600;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.theme-cyber #breach-stages li.active {
+    /* Gradient fade from left to right */
+    background: linear-gradient(90deg, rgba(244, 63, 94, 0.15) 0%, transparent 100%);
+    box-shadow: none;
+    /* Remove box shadow to match clean image */
+    text-shadow: 0 0 8px rgba(244, 63, 94, 0.6);
+    /* Stronger text glow */
+    border-left-color: var(--status-error);
+}
+
+#breach-stages li.passed {
+    color: var(--text-muted);
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Theme Toggle */
+.theme-toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s var(--ease-default);
+    z-index: 50;
+}
+
+.theme-toggle-btn:hover {
+    background: var(--bg-primary);
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+/* Word Display */
+.word-display-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0;
+    margin-bottom: 20px;
+}
+
+.word-display {
+    font-family: var(--font-mono);
+    font-size: 3rem;
+    letter-spacing: 0.5em;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.theme-cyber .word-display {
+    text-shadow: 0 0 15px var(--accent-primary);
+}
+
+/* Log / Message Area */
+.Log {
+    flex-grow: 1;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.05);
+    /* Very subtle tint */
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+}
+
+.theme-cyber .Log {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+}
+
+.Log p {
+    margin: 6px 0;
+    line-height: 1.5;
+}
+
+.sys-msg {
+    color: var(--text-secondary);
+}
+
+.user-msg {
+    color: var(--accent-primary);
+    font-weight: bold;
+}
+
+.err-msg {
+    color: var(--status-error);
+}
+
+.win-msg {
+    color: var(--status-success);
+}
+
+.theme-cyber .err-msg {
+    text-shadow: 0 0 5px var(--status-error);
+}
+
+.theme-cyber .win-msg {
+    text-shadow: 0 0 5px var(--status-success);
+}
+
+/* Input Area */
+.input-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg-primary);
+    /* Slightly different from panel */
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.prompt {
+    color: var(--status-success);
+    font-family: var(--font-mono);
+    font-weight: bold;
+}
+
+input {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    flex-grow: 1;
+    outline: none;
+    text-transform: uppercase;
+}
+
+button.game-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    transition: all 0.2s var(--ease-default);
+}
+
+button.game-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+/* =========================================
+   5. ANIMATION KEYFRAMES & CLASSES
+   ========================================= */
+
+/* Letter Reveal (Success) */
+@keyframes popIn {
+    0% {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.anim-pop {
+    animation: popIn 220ms var(--ease-bounce) forwards;
+}
+
+/* Shake (Error) */
+@keyframes shakeFine {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+.anim-shake {
+    animation: shakeFine 200ms var(--ease-snap);
+}
+
+/* Blink Cursor */
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.prompt::after {
+    content: '_';
+    animation: blink 1s infinite steps(1);
+    margin-left: 2px;
+}
+
+/* Cyber Only Effects */
+.theme-cyber .crt-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    opacity: var(--scanline-opacity);
+    z-index: 90;
+}
+
+.theme-cyber .viginette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 60%, black 100%);
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 91;
+}
+
+/* 3. Cyber Grid Overlay (Ambient Motion) */
+body.theme-cyber .cyber-grid-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    z-index: 80;
+    /* Behind content, over background */
+
+    background-image:
+        linear-gradient(rgba(34, 197, 94, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 197, 94, 0.08) 1px, transparent 1px);
+
+    background-size: 28px 28px;
+    animation: gridDrift 40s linear infinite;
+}
+
+.cyber-grid-overlay.paused {
+    animation-play-state: paused;
+}
+
+@keyframes gridDrift {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(28px);
+    }
+}
+
+/* 4. Minimal Gradient Overlay (Ambient Motion) */
+/* Only visible when NOT in cyber theme */
+body:not(.theme-cyber) .minimal-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: -1;
+    /* Background */
+
+    background: radial-gradient(circle at 50% 50%,
+            rgba(6, 182, 212, 0.05) 0%,
+            transparent 60%);
+    background-size: 150% 150%;
+
+    animation: gradientDrift 30s ease-in-out infinite alternate;
+}
+
+.minimal-gradient-overlay.paused {
+    animation-play-state: paused;
+}
+
+@keyframes gradientDrift {
+    0% {
+        background-position: 50% 50%;
+        opacity: 0.6;
+    }
+
+    50% {
+        background-position: 45% 55%;
+        opacity: 0.8;
+        /* Subtle pulse */
+    }
+
+    100% {
+        background-position: 55% 45%;
+        opacity: 0.6;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-cyber .typewriter-caret::after {
+        animation: none;
+    }
+}
+
+/* 6. Hangman Visual (Shared) */
+.hangman-container {
+    width: 100%;
+    height: 150px;
+    /* Reduced to save vertical space */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+    /* Prevent crushing */
+}
+
+.hangman-svg {
+    height: 100%;
+    stroke: var(--text-secondary);
+    /* Minimal Default */
+    stroke-width: 4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: all 0.3s ease;
+}
+
+.hangman-part {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Cyber Theme Overrides */
+.theme-cyber .hangman-svg {
+    stroke: var(--accent-primary);
+    /* Neon Green */
+    filter: drop-shadow(0 0 4px var(--accent-primary));
+}
+
+/* Base parts dimming in Cyber for "hologram" feel */
+.theme-cyber .hangman-base {
+    opacity: 0.5;
+}
+
+/* Win/Loss Effects */
+@keyframes successSweep {
+    0% {
+        background-color: var(--bg-panel);
+    }
+
+    50% {
+        background-color: rgba(34, 197, 94, 0.1);
+    }
+
+    100% {
+        background-color: var(--bg-panel);
+    }
+}
+
+.anim-success-sweep {
+    animation: successSweep 800ms var(--ease-default);
+}
+
+@keyframes failDesaturate {
+    0% {
+        filter: grayscale(0);
+    }
+
+    100% {
+        filter: grayscale(1);
+        opacity: 0.8;
+    }
+}
+
+.anim-fail {
+    animation: failDesaturate 1200ms ease-in-out forwards;
+}

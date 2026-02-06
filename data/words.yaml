@@ -1,0 +1,72 @@
+words:
+  - word: "ENCRYPTION"
+    category: "Cybersecurity"
+    difficulty: 1
+    definition: "The process of converting information or data into a code, especially to prevent unauthorized access."
+    hints:
+      - "Scrambling data to hide it."
+      - "Essential for secure communication over the internet."
+      - "Uses keys to lock and unlock information."
+  
+  - word: "FIREWALL"
+    category: "Network Security"
+    difficulty: 1
+    definition: "A network security device that monitors and filters incoming and outgoing network traffic."
+    hints:
+      - "A barrier between a trusted and an untrusted network."
+      - "Blocks unauthorized access while permitting outward communication."
+      - "Can be hardware or software."
+
+  - word: "PHISHING"
+    category: "Social Engineering"
+    difficulty: 1
+    definition: "A cybercrime in which a target or targets are contacted by email, telephone or text message by someone posing as a legitimate institution."
+    hints:
+      - "Baiting a user to give up sensitive info."
+      - "Often comes as a fake email from your bank."
+      - "Sounds like a relaxing hobby, but it's dangerous."
+
+  - word: "MALWARE"
+    category: "Cybersecurity"
+    difficulty: 1
+    definition: "Software that is specifically designed to disrupt, damage, or gain unauthorized access to a computer system."
+    hints:
+      - "Bad software."
+      - "Viruses, worms, and trojans are types of this."
+      - "A contraction of 'Malicious Software'."
+
+  - word: "AUTHENTICATION"
+    category: "Access Control"
+    difficulty: 2
+    definition: "The process or action of verifying the identity of a user or process."
+    hints:
+      - "Proving you are who you say you are."
+      - "Logins often require this."
+      - "Something you allow, something you have, or something you are."
+
+  - word: "VULNERABILITY"
+    category: "Cybersecurity"
+    difficulty: 2
+    definition: "A weakness which can be exploited by a threat actor, such as an attacker, to cross privilege boundaries within a computer system."
+    hints:
+      - "A flaw in the system."
+      - "Hackers look for these to get in."
+      - "Patching software fixes these."
+
+  - word: "BLOCKCHAIN"
+    category: "Cryptography"
+    difficulty: 3
+    definition: "A system in which a record of transactions made in bitcoin or another cryptocurrency is maintained across several computers that are linked in a peer-to-peer network."
+    hints:
+      - "A chain of blocks."
+      - "Decentralized ledger technology."
+      - "Famous for powering Bitcoin."
+
+  - word: "PENETRATION"
+    category: "dSec Ops"
+    difficulty: 2
+    definition: "A simulated cyberattack against your computer system to check for exploitable vulnerabilities."
+    hints:
+      - "Testing defenses by attacking them."
+      - "Ethical hacking."
+      - "Often followed by 'Testing'."
