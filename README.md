@@ -20,7 +20,7 @@ A retro-futuristic terminal hacking simulation inspired by the Fallout series. T
 
 1. **Clone the repository** (or download source):
    ```bash
-   git clone <[repository-url](https://github.com/ANAGHAKTP/Hangman)>
+   git clone https://github.com/ANAGHAKTP/Hangman
    cd secure_access_system
    ```
 
