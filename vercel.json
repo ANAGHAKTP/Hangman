@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "src/web/app.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxDuration": 10,
+                "includeFiles": [
+                    "data/**"
+                ]
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "src/web/app.py"
+        }
+    ]
+}
